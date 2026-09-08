@@ -11,7 +11,7 @@ public class FunctionController {
     Attendance attendance;
     Map<Menu, MenuAction> actions = new HashMap<>();
 
-    public FunctionController(LocalDate today, Attendance attendance, InputView inputView , OutputView outputView) {
+    public FunctionController(LocalDate today, Attendance attendance, InputView inputView , OutputView outputView, UiController uiController) {
         this.today = today;
         this.attendance = attendance;
         this.inputView = inputView;
@@ -19,10 +19,10 @@ public class FunctionController {
         this.attendance = attendance;
 
         MenuAction check = new CheckAttendance(today, inputView, outputView, attendance);
-        MenuAction modify = new ModifyAttendance();
-        MenuAction record = new ShowAttendance();
-        MenuAction warning = new checkNeedWarnedStudent();
-        MenuAction exit = new ExitProgram();
+        MenuAction modify = new ModifyAttendance(today, inputView, outputView, attendance);
+        MenuAction record = new ShowStudentAttendanceRecord(today, inputView, outputView, attendance);
+        MenuAction warning = new checkNeedWarnedStudent(today, inputView, outputView, attendance);
+        MenuAction exit = new ExitProgram(uiController);
 
         actions.put(Menu.CHECK, check);
         actions.put(Menu.MODIFY, modify);

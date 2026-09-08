@@ -1,5 +1,11 @@
 package attendance;
 
 public class ExitProgram implements MenuAction {
-    public void run() {}
+    UiController uiController;
+    public ExitProgram(UiController uiController) {
+        this.uiController = uiController;
+    }
+    public void run() {
+        uiController.quit();
+    }
 }

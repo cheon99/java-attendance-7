@@ -18,10 +18,13 @@ public class  AttendanceResourceLoader {
         List<String> lines = reader.lines().skip(1).toList();
         for (String line : lines) {
             String[] columns = line.split(",", -1);
-            Student student = new Student(columns[0]);
+            if (!attendance.hasStudent(columns[0])){
+                addStudent(attendance, new Student(columns[0]));
+            }
+            Student student = attendance.getStudent(columns[0]);
             String[] splitedDateTime = columns[1].split(" ",-1);
             student.addAttendance(parseDate(splitedDateTime[0]), parseTime(splitedDateTime[1]));
-            addStudent(attendance, student);
+
         }
         return attendance;
     }

@@ -9,13 +9,13 @@ import java.util.Locale;
 public class CheckAttendance implements MenuAction {
     LocalDate today ;
     InputView inputView ;
-    OutputView outputView;
     Attendance attendance;
+    OutputView outputView;
     public CheckAttendance(LocalDate today, InputView inputView, OutputView outputView, Attendance attendance) {
         this.today = today;
         this.inputView = inputView;
-        this.outputView = outputView;
         this.attendance = attendance;
+        this.outputView = outputView;
     }
     public void run() {
         String dayStr = today.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.KOREAN);
@@ -38,6 +38,7 @@ public class CheckAttendance implements MenuAction {
         if (attendance.hasAttendance(nickname, today)){
             throw new IllegalArgumentException("[ERROR] 이미 출석을 확인하였습니다. 필요한 경우 수정 기능을 이용해 주세요.");
         }
-        attendance.addAttendance(nickname, today ,attendTime);
+        attendance.addAttendance(nickname, today, attendTime);
+        outputView.printCheckAttendanceResult(today, attendTime, attendance.getAttendanceStatus(nickname, today));
     }
 }

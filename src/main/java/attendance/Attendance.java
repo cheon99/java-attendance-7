@@ -14,12 +14,35 @@ public class Attendance {
     public boolean hasStudent(String name) {
         return studentBook.containsKey(name);
     }
-    public boolean hasAttendance(String name, LocalDate today) {
-        Student student = studentBook.get(name) ;
-        return student.hasAttendance(today);
-    }
     public void addAttendance(String name, LocalDate date, LocalTime attendTime) {
         Student student = studentBook.get(name) ;
         student.addAttendance(date, attendTime);
+    }
+    public boolean hasAttendance(String name, LocalDate date) {
+        Student student = studentBook.get(name) ;
+        return student.hasAttendance(date) ;
+    }
+    public Student getStudent(String name) {
+        return studentBook.get(name);
+    }
+
+    public void modifyAttendance(String name, LocalDate attendanceDate, LocalTime attendTime) {
+        Student student = studentBook.get(name) ;
+        student.modifyAttendance(attendanceDate, attendTime);
+    }
+    public AttendanceStatus getAttendanceStatus(String name, LocalDate date) {
+        Student student = studentBook.get(name) ;
+        return student.getAttendanceStatus(date);
+    }
+    public LocalTime getAttendanceTime(String name, LocalDate date) {
+        Student student = studentBook.get(name) ;
+        return student.getAttendanceTime(date);
+    }
+    public  Map<LocalDate, AttendanceRecord> getAttendanceLog(String name) {
+        Student student = studentBook.get(name) ;
+        return student.getAttendanceLog();
+    }
+    public Map<String, Student> getStudentBook() {
+        return studentBook;
     }
 }
