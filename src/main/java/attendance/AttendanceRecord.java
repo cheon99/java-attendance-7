@@ -8,10 +8,9 @@ public class AttendanceRecord {
     LocalTime localTime;
     boolean isLate;
     boolean isNotAttended;
-    public AttendanceRecord(String dateTime) {
-        String[] splitedDateTime = dateTime.split(" ", -1);
-        this.localDate = LocalDate.parse(splitedDateTime[0]);
-        this.localTime = LocalTime.parse(splitedDateTime[1]);
+    public AttendanceRecord(LocalDate date, LocalTime time) {
+        this.localDate = date ;
+        this.localTime = time ;
     }
     public boolean isLated() {return isLate;}
     public boolean isNotAttended() {return isNotAttended;}
