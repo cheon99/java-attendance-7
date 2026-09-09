@@ -31,23 +31,23 @@ public class OutputView {
     public void printModifyAttendanceResult(String string){
         System.out.println(string);
     }
-    public void printStudentAttendanceRecordLog(PenaltyResult result, Map<LocalDate, AttendanceRecord> attendanceLog) {
+    public void printStudentAttendanceRecordLog(PenaltyResult result) {
         LocalDate date = result.getDate();
-        Map<LocalDate, AttendanceStatus> attendanceStatusLog = result.getAttendanceStatusLog();
+        Map<LocalDate, AttendanceRecord> attendanceRecordExtended = result.getAttendanceRecordExtended();
         System.out.printf("이번 달 %s의 출석 기록입니다.%n",result.getName());
         for (int day = 1; day <= date.lengthOfMonth(); day++) {
             LocalDate checkDate = date.withDayOfMonth(day);
             if (AttendanceDayType.from(checkDate.getDayOfWeek()) == AttendanceDayType.WEEKEND) {continue;}
             if (checkDate == date) {break;}
             String dayStr = checkDate.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.KOREAN);
-            if (attendanceLog.get(checkDate) == null) {
-                System.out.printf("%d월 %d일 %s --:-- (%s)%n", checkDate.getMonthValue(), checkDate.getDayOfMonth(), dayStr, attendanceStatusLog.get(checkDate).getValue());
+            if (attendanceRecordExtended.get(checkDate).getAttendanceTime() == null) {
+                System.out.printf("%d월 %d일 %s --:-- (%s)%n", checkDate.getMonthValue(), checkDate.getDayOfMonth(), dayStr, attendanceRecordExtended.get(checkDate).getAttendanceStatus().getValue());
                 continue;
             }
-            System.out.printf("%d월 %d일 %s %s (%s)%n", checkDate.getMonthValue(), checkDate.getDayOfMonth(), dayStr, attendanceLog.get(checkDate).getAttendanceTime().toString(), attendanceStatusLog.get(checkDate).getValue());
+            System.out.printf("%d월 %d일 %s %s (%s)%n", checkDate.getMonthValue(), checkDate.getDayOfMonth(), dayStr, attendanceRecordExtended.get(checkDate).getAttendanceTime().toString(), attendanceRecordExtended.get(checkDate).getAttendanceStatus().getValue());
         }
     }
-    public void printStudentAttendanceRecordLog(PenaltyResult result){
+    public void printStudentAttendanceRecordSummary(PenaltyResult result){
         int present = result.getPresent();
         int late = result.getLate();
         int absent = result.getAbsent();
@@ -56,7 +56,7 @@ public class OutputView {
         System.out.printf("결석: %d회%n", absent);
         DisciplinaryPolicy status = result.getStatus();
         if (status != DisciplinaryPolicy.FINE) {
-            System.out.printf("%s 대상자입니다.", status.getValue());
+            System.out.printf("%s 대상자입니다.%n", status.getValue());
         }
     }
     public void printPreStringForWarnedStudent() {

@@ -42,7 +42,7 @@ public class Student {
         int present = 0;
         int late = 0;
         int absent = 0;
-        Map<LocalDate, AttendanceStatus> attendanceStatusLog = new HashMap<>();
+        Map<LocalDate, AttendanceRecord> attendanceRecordExtended = new HashMap<>();
         for (int day = 1; day <= today.lengthOfMonth(); day++) {
             LocalDate date = today.withDayOfMonth(day);
             if (AttendanceDayType.from(date.getDayOfWeek()) == AttendanceDayType.WEEKEND) {
@@ -53,23 +53,21 @@ public class Student {
             }
             AttendanceRecord record = attendanceLog.get(date);
             if  (record == null) {
-                attendanceStatusLog.put(date, AttendanceStatus.ABSENT);
                 absent++;
+                attendanceRecordExtended.put(date, new AttendanceRecord(date, null));
                 continue;
             }
             AttendanceStatus status = record.getAttendanceStatus();
             if (status == AttendanceStatus.ABSENT) {
-                attendanceStatusLog.put(date, AttendanceStatus.ABSENT);
                 absent++;
             }
             if (status == AttendanceStatus.LATE) {
-                attendanceStatusLog.put(date, AttendanceStatus.LATE);
                 late++;
             }
             present++;
-            attendanceStatusLog.put(date, AttendanceStatus.PRESENT);
+            attendanceRecordExtended.put(date, new AttendanceRecord(date, record.getAttendanceTime()));
         }
-        return new PenaltyResult(name, DisciplinaryPolicy.from(late, absent), attendanceStatusLog, present, late, absent, today);
+        return new PenaltyResult(name, DisciplinaryPolicy.from(late, absent), attendanceRecordExtended, present, late, absent, today);
     }
 }
 

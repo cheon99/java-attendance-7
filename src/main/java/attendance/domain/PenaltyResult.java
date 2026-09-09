@@ -10,15 +10,15 @@ public class PenaltyResult {
     private int late;
     private int absent;
     private LocalDate date;
-    private Map<LocalDate, AttendanceStatus> attendanceStatusLog ;
-    public PenaltyResult(String name, DisciplinaryPolicy status, Map<LocalDate, AttendanceStatus> attendanceStatusLog, int present, int late, int absent, LocalDate date) {
+    private Map<LocalDate, AttendanceRecord> attendanceRecordExtended ;
+    public PenaltyResult(String name, DisciplinaryPolicy status, Map<LocalDate, AttendanceRecord> attendanceRecordExtended, int present, int late, int absent, LocalDate date) {
         this.name = name;
         this.status = status;
         this.present = present;
         this.late = late;
         this.absent = absent;
         this.date = date;
-        this.attendanceStatusLog = attendanceStatusLog;
+        this.attendanceRecordExtended = attendanceRecordExtended;
     }
     public DisciplinaryPolicy getStatus() { return status; }
     public int getPresent() { return present; }
@@ -26,5 +26,5 @@ public class PenaltyResult {
     public int getAbsent() { return absent; }
     public String getName() { return name; }
     public LocalDate getDate() { return date; }
-    public Map<LocalDate, AttendanceStatus> getAttendanceStatusLog() { return attendanceStatusLog; }
+    public Map<LocalDate, AttendanceRecord> getAttendanceRecordExtended() { return attendanceRecordExtended; }
 }
