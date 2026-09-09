@@ -1,4 +1,4 @@
-package attendance;
+package attendance.io;
 
 import camp.nextstep.edu.missionutils.Console;
 

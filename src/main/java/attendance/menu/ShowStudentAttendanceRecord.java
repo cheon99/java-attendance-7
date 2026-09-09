@@ -1,4 +1,11 @@
-package attendance;
+package attendance.menu;
+
+import attendance.domain.ActionResult;
+import attendance.domain.Attendance;
+import attendance.domain.AttendanceRecord;
+import attendance.domain.PenaltyResult;
+import attendance.io.InputView;
+import attendance.io.OutputView;
 
 import java.time.LocalDate;
 import java.util.Map;
@@ -14,12 +21,15 @@ public class ShowStudentAttendanceRecord implements MenuAction {
         this.attendance = attendance;
         this.today = today;
     }
-    public void run() {
+    public ActionResult run() {
         String nickname = inputView.readNickname();
         if (!attendance.hasStudent(nickname)){
             throw new IllegalArgumentException("[ERROR] 등록되지 않은 닉네임입니다.");
         }
+        PenaltyResult result = attendance.getStudent(nickname).checkPenaltyStatus(today);
         Map<LocalDate, AttendanceRecord> attendanceLog = attendance.getAttendanceLog(nickname);
-        outputView.printStudentAttendanceRecord(today, nickname, attendanceLog);
+        outputView.printStudentAttendanceRecordLog(result, attendanceLog) ;
+        outputView.printStudentAttendanceRecordLog(result) ;
+        return  ActionResult.CONTINUE;
     }
 }

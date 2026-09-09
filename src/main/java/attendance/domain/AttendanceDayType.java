@@ -1,7 +1,6 @@
-package attendance;
+package attendance.domain;
 
 import java.time.DayOfWeek;
-import java.time.LocalTime;
 
 public enum AttendanceDayType {
     MONDAY,

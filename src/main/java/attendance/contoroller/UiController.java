@@ -1,4 +1,9 @@
-package attendance;
+package attendance.contoroller;
+
+import attendance.domain.Attendance;
+import attendance.io.InputView;
+import attendance.io.OutputView;
+import attendance.domain.ActionResult;
 
 import java.time.LocalDate;
 
@@ -8,7 +13,6 @@ public class UiController {
     LocalDate today ;
     Attendance attendance;
     FunctionController functionController;
-    private boolean quit = false;
     public UiController(LocalDate today,  Attendance attendance, InputView inputView , OutputView outputView) {
         this.today = today;
         this.attendance = attendance;
@@ -16,17 +20,16 @@ public class UiController {
         this.outputView = outputView;
     }
     public void run() {
-        functionController = new FunctionController(today, attendance, inputView, outputView, this);
+        boolean quit =  false;
+        functionController = new FunctionController(today, attendance, inputView, outputView);
         try {
             while (!quit) {
                 outputView.printMenu(today);
-                functionController.run(inputView.readSelection());
+                ActionResult result = functionController.run(inputView.readSelection());
+                quit = result == ActionResult.EXIT;
             }
         } catch(IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
-    }
-    public void quit() {
-        quit = true;
     }
 }

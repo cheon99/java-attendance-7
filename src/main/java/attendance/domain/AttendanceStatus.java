@@ -1,8 +1,7 @@
-package attendance;
+package attendance.domain;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.temporal.ChronoUnit;
 
 public enum AttendanceStatus {
     PRESENT("출석"),
@@ -18,6 +17,9 @@ public enum AttendanceStatus {
     }
 
     public static AttendanceStatus from(LocalDate date, LocalTime time) {
+        if (time == null) {
+            return AttendanceStatus.ABSENT;
+        }
         LocalTime startTime = AttendancePolicy.getStartTime(date);
         if (time.isBefore(startTime.plusMinutes(6))) {
             return PRESENT;

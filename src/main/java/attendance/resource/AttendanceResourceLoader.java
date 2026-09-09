@@ -1,4 +1,7 @@
-package attendance;
+package attendance.resource;
+
+import attendance.domain.Student;
+import attendance.domain.Attendance;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

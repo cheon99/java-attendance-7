@@ -1,4 +1,11 @@
-package attendance;
+package attendance.menu;
+
+import attendance.domain.ActionResult;
+import attendance.domain.Attendance;
+import attendance.domain.AttendanceDayType;
+import attendance.io.InputView;
+import attendance.io.OutputView;
+import attendance.domain.AttendancePolicy;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -17,7 +24,7 @@ public class ModifyAttendance implements MenuAction {
         this.attendance = attendance;
         this.outputView = outputView;
     }
-    public void run() {
+    public ActionResult run() {
         String nickname = inputView.readNickname();
         if (!attendance.hasStudent(nickname)){
             throw new IllegalArgumentException("[ERROR] 등록되지 않은 닉네임입니다.");
@@ -51,5 +58,6 @@ public class ModifyAttendance implements MenuAction {
         attendance.modifyAttendance(nickname, attendanceDate, attendTime);
         String finalString = preString + "%s (%s) 수정 완료!".formatted(attendTime.toString(), attendance.getAttendanceStatus(nickname, attendanceDate).getValue());
         outputView.printModifyAttendanceResult(finalString);
+        return ActionResult.CONTINUE;
     }
 }

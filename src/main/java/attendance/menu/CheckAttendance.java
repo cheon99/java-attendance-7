@@ -1,4 +1,11 @@
-package attendance;
+package attendance.menu;
+
+import attendance.domain.ActionResult;
+import attendance.domain.Attendance;
+import attendance.domain.AttendanceDayType;
+import attendance.io.InputView;
+import attendance.io.OutputView;
+import attendance.domain.AttendancePolicy;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -17,7 +24,7 @@ public class CheckAttendance implements MenuAction {
         this.attendance = attendance;
         this.outputView = outputView;
     }
-    public void run() {
+    public ActionResult run() {
         String dayStr = today.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.KOREAN);
         if (AttendanceDayType.from(today.getDayOfWeek()) == AttendanceDayType.WEEKEND) {
             throw new IllegalArgumentException("[ERROR] %d월 %d일 %s은 등교일이 아닙니다.".formatted(today.getMonthValue(), today.getDayOfMonth(), dayStr));
@@ -40,5 +47,7 @@ public class CheckAttendance implements MenuAction {
         }
         attendance.addAttendance(nickname, today, attendTime);
         outputView.printCheckAttendanceResult(today, attendTime, attendance.getAttendanceStatus(nickname, today));
+
+        return ActionResult.CONTINUE;
     }
 }
