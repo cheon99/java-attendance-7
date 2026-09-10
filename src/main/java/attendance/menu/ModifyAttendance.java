@@ -1,6 +1,6 @@
 package attendance.menu;
 
-import attendance.domain.ActionResult;
+import attendance.application.ActionResult;
 import attendance.domain.Attendance;
 import attendance.domain.AttendanceDayType;
 import attendance.io.InputView;

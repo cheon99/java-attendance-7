@@ -1,6 +1,6 @@
 package attendance.menu;
 
-import attendance.domain.ActionResult;
+import attendance.application.ActionResult;
 
 public class ExitProgram implements MenuAction {
     public ActionResult run() {

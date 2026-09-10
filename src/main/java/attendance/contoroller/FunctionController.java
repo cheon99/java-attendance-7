@@ -1,9 +1,9 @@
 package attendance.contoroller;
 
-import attendance.domain.ActionResult;
+import attendance.application.ActionResult;
 import attendance.menu.*;
 import attendance.domain.Attendance;
-import attendance.domain.Menu;
+import attendance.application.Menu;
 import attendance.io.InputView;
 import attendance.io.OutputView;
 

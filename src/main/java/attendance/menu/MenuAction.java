@@ -1,6 +1,6 @@
 package attendance.menu;
 
-import attendance.domain.ActionResult;
+import attendance.application.ActionResult;
 
 public interface MenuAction {
     public ActionResult run();

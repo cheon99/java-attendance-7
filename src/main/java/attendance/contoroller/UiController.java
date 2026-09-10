@@ -3,7 +3,7 @@ package attendance.contoroller;
 import attendance.domain.Attendance;
 import attendance.io.InputView;
 import attendance.io.OutputView;
-import attendance.domain.ActionResult;
+import attendance.application.ActionResult;
 
 import java.time.LocalDate;
 

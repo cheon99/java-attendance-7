@@ -1,4 +1,4 @@
-package attendance.domain;
+package attendance.application;
 
 public enum Menu {
     CHECK("1"),

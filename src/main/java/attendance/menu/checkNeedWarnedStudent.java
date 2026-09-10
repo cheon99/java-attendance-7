@@ -1,6 +1,7 @@
 
 package attendance.menu;
 
+import attendance.application.ActionResult;
 import attendance.domain.*;
 import attendance.io.OutputView;
 
