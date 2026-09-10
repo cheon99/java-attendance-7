@@ -2,8 +2,7 @@ package attendance.domain;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Attendance {
     Map<String, Student> studentBook = new HashMap<>();
@@ -38,7 +37,23 @@ public class Attendance {
         Student student = studentBook.get(name) ;
         return student.getAttendanceTime(date);
     }
-    public Map<String, Student> getStudentBook() {
-        return studentBook;
+    public List<List<AttendanceReport>> findDisciplinaryCandidates(LocalDate date) {
+        List<AttendanceReport> EXPULSION = new ArrayList<>();
+        List<AttendanceReport> MEETING = new ArrayList<>();
+        List<AttendanceReport> WARN = new ArrayList<>();
+        List<List<AttendanceReport>> listArr = List.of(EXPULSION, MEETING, WARN);
+        for (Student student : studentBook.values()) {
+            AttendanceReport result = student.checkPenaltyStatus(date);
+            if (result.getStatus() == DisciplinaryPolicy.EXPULSION){EXPULSION.add(result);}
+            if (result.getStatus() == DisciplinaryPolicy.MEETING){MEETING.add(result);}
+            if (result.getStatus() == DisciplinaryPolicy.WARN){WARN.add(result);}
+        }
+        return sortList(listArr);
+    }
+    private List<List<AttendanceReport>> sortList(List<List<AttendanceReport>> listArr) {
+        for (List<AttendanceReport> list : listArr) {
+            list.sort(Comparator.comparingInt((AttendanceReport result) -> result.getLate() / 3 + result.getAbsent()).reversed().thenComparing(AttendanceReport::getName));
+        }
+        return listArr;
     }
 }
