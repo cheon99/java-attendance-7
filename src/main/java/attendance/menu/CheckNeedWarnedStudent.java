@@ -8,11 +8,11 @@ import attendance.io.OutputView;
 import java.time.LocalDate;
 import java.util.*;
 
-public class checkNeedWarnedStudent implements MenuAction {
+public class CheckNeedWarnedStudent implements MenuAction {
     LocalDate today ;
     Attendance attendance;
     OutputView outputView;
-    public checkNeedWarnedStudent(LocalDate today, OutputView outputView, Attendance attendance) {
+    public CheckNeedWarnedStudent(LocalDate today, OutputView outputView, Attendance attendance) {
         this.today = today;
         this.attendance = attendance;
         this.outputView = outputView;

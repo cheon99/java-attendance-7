@@ -10,12 +10,12 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 
-public class CheckAttendance implements MenuAction {
+public class CheckInAttendance implements MenuAction {
     LocalDate today ;
     InputView inputView ;
     Attendance attendance;
     OutputView outputView;
-    public CheckAttendance(LocalDate today, InputView inputView, OutputView outputView, Attendance attendance) {
+    public CheckInAttendance(LocalDate today, InputView inputView, OutputView outputView, Attendance attendance) {
         this.today = today;
         this.inputView = inputView;
         this.attendance = attendance;
