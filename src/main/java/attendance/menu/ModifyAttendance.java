@@ -3,6 +3,7 @@ package attendance.menu;
 import attendance.application.ActionResult;
 import attendance.domain.Attendance;
 import attendance.domain.AttendanceDayType;
+import attendance.io.InputParser;
 import attendance.io.InputView;
 import attendance.io.OutputView;
 import attendance.domain.AttendancePolicy;
@@ -36,12 +37,7 @@ public class ModifyAttendance implements MenuAction {
         if (attendanceDate.isAfter(today)) {
             throw new IllegalArgumentException("[ERROR] 잘못된 형식을 입력하였습니다.");
         }
-        LocalTime attendTime;
-        try {
-            attendTime = LocalTime.parse(inputView.readModifiedAttendTime());
-        } catch (DateTimeParseException e) {
-            throw new IllegalArgumentException("[ERROR] 잘못된 형식을 입력하였습니다.");
-        }
+        LocalTime attendTime = InputParser.timeParse(inputView.readAttendTime());
         if (!attendance.hasAttendance(nickname, attendanceDate)){
             throw new IllegalArgumentException("[ERROR] 해당 날짜에 수정할 기록이 없습니다");
         }
