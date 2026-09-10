@@ -22,8 +22,7 @@ public class Student {
         return this.attendanceLog.containsKey(date) ;
     }
     public void modifyAttendance(LocalDate date, LocalTime time) {
-        AttendanceRecord record = this.attendanceLog.get(date);
-        record.modifyAttendance(date, time);
+        attendanceLog.replace(date, new AttendanceRecord(date, time));
     }
     public AttendanceStatus getAttendanceStatus(LocalDate date) {
         AttendanceRecord record = this.attendanceLog.get(date);

@@ -14,7 +14,7 @@ public class PenaltyResult {
     public PenaltyResult(String name, Map<LocalDate, AttendanceRecord> attendanceRecordExtended, LocalDate date) {
         this.name = name;
         this.date = date;
-        this.attendanceRecordExtended = attendanceRecordExtended;
+        this.attendanceRecordExtended = Map.copyOf(attendanceRecordExtended);
         updatePenaltyResult();
     }
     private void updatePenaltyResult() {
