@@ -12,8 +12,9 @@ public class AttendanceRecord {
     public AttendanceRecord(LocalDate date, LocalTime time) {
         String dayStr = date.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.KOREAN);
         require(AttendanceDayType.from(date.getDayOfWeek()) == AttendanceDayType.WEEKEND, "[ERROR] %d월 %d일 %s은 등교일이 아닙니다.".formatted(date.getMonthValue(), date.getDayOfMonth(), dayStr));
-        require(!AttendancePolicy.isOperationTime(time), "[ERROR] 캠퍼스 운영 시간에만 출석이 가능합니다.");
-
+        if (time != null) {
+            require(!AttendancePolicy.isOperationTime(time), "[ERROR] 캠퍼스 운영 시간에만 출석이 가능합니다.");
+        }
         this.date = date ;
         this.attendanceTime = time ;
         this.status = AttendanceStatus.from(date, attendanceTime);
