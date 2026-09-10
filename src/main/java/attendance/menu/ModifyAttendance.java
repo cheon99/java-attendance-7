@@ -31,9 +31,6 @@ public class ModifyAttendance implements MenuAction {
             throw new IllegalArgumentException("[ERROR] 잘못된 형식을 입력하였습니다.");
         }
         LocalTime attendTime = Parser.timeParse(inputView.readModifiedAttendTime());
-        if (!attendance.hasAttendance(nickname, attendanceDate)){
-            throw new IllegalArgumentException("[ERROR] 해당 날짜에 수정할 기록이 없습니다");
-        }
         outputView.printPreStringForModifyAttendanceResult(attendanceDate.getMonthValue(), attendanceDate.getDayOfMonth(), dayStr, attendance.getAttendanceTime(nickname, attendanceDate).toString(), attendance.getAttendanceStatus(nickname, attendanceDate).getValue() );
         attendance.modifyAttendance(nickname, attendanceDate, attendTime);
         outputView.printModifyAttendanceResult(attendTime.toString(), attendance.getAttendanceStatus(nickname, attendanceDate).getValue());

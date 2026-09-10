@@ -27,6 +27,9 @@ public class Student {
         return this.attendanceLog.containsKey(date) ;
     }
     public void modifyAttendance(LocalDate date, LocalTime time) {
+        if (!attendanceLog.containsKey(date)) {
+            throw new IllegalArgumentException("[ERROR] 해당 날짜에 수정할 기록이 없습니다");
+        }
         attendanceLog.replace(date, new AttendanceRecord(date, time));
     }
     public AttendanceStatus getAttendanceStatus(LocalDate date) {
