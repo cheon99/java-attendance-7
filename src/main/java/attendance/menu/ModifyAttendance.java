@@ -2,11 +2,9 @@ package attendance.menu;
 
 import attendance.application.ActionResult;
 import attendance.domain.Attendance;
-import attendance.domain.AttendanceDayType;
 import attendance.io.InputParser;
 import attendance.io.InputView;
 import attendance.io.OutputView;
-import attendance.domain.AttendancePolicy;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -29,7 +27,7 @@ public class ModifyAttendance implements MenuAction {
         String nickname = inputView.readNickname();
         LocalDate attendanceDate;
         try {
-            attendanceDate = today.withDayOfMonth(inputView.readDay());
+            attendanceDate = today.withDayOfMonth(InputParser.intParse(inputView.readDay()));
         } catch (DateTimeParseException e) {
             throw new IllegalArgumentException("[ERROR] 잘못된 형식을 입력하였습니다.");
         }

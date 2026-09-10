@@ -16,7 +16,7 @@ public class InputView {
     }
     public int readDay() {
         System.out.println("수정하려는 날짜(일)를 입력해 주세요.");
-        return Integer.parseInt(Console.readLine());
+        return Console.readLine();
     }
     public String readModifiedAttendTime(){
         System.out.println("언제로 변경하겠습니까?");
