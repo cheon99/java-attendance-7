@@ -15,6 +15,9 @@ public class Student {
         this.name = name;
     }
     public void addAttendance(LocalDate date, LocalTime time) {
+        if  (attendanceLog.containsKey(date)) {
+            throw new IllegalArgumentException("[ERROR] 이미 출석을 확인하였습니다. 필요한 경우 수정 기능을 이용해 주세요.");
+        }
         this.attendanceLog.put(date, new AttendanceRecord(date, time));
     }
     public String name() {

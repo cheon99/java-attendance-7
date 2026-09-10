@@ -23,12 +23,8 @@ public class CheckAttendance implements MenuAction {
     public ActionResult run() {
         String nickname = inputView.readNickname();
         LocalTime attendTime = Parser.timeParse(inputView.readAttendTime());
-        if (attendance.hasAttendance(nickname, today)){
-            throw new IllegalArgumentException("[ERROR] 이미 출석을 확인하였습니다. 필요한 경우 수정 기능을 이용해 주세요.");
-        }
         attendance.addAttendance(nickname, today, attendTime);
         outputView.printCheckAttendanceResult(today, attendTime, attendance.getAttendanceStatus(nickname, today));
-
         return ActionResult.CONTINUE;
     }
 }
