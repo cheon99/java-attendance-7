@@ -6,7 +6,10 @@ import java.util.*;
 
 public class Attendance {
     Map<String, Student> studentBook = new HashMap<>();
-
+    public Student getStudentByName(String studentName) {
+        if (hasStudent(studentName)){ return studentBook.get(studentName); }
+        throw new IllegalArgumentException("[ERROR] 등록되지 않은 닉네임입니다.");
+    }
     public void addStudent(Student student) {
         studentBook.put(student.name(), student);
     }
@@ -14,27 +17,27 @@ public class Attendance {
         return studentBook.containsKey(name);
     }
     public void addAttendance(String name, LocalDate date, LocalTime attendTime) {
-        Student student = studentBook.get(name) ;
+        Student student = getStudentByName(name) ;
         student.addAttendance(date, attendTime);
     }
     public boolean hasAttendance(String name, LocalDate date) {
-        Student student = studentBook.get(name) ;
+        Student student = getStudentByName(name) ;
         return student.hasAttendance(date) ;
     }
     public Student getStudent(String name) {
-        return studentBook.get(name);
+        return getStudentByName(name);
     }
 
     public void modifyAttendance(String name, LocalDate attendanceDate, LocalTime attendTime) {
-        Student student = studentBook.get(name) ;
+        Student student = getStudentByName(name) ;
         student.modifyAttendance(attendanceDate, attendTime);
     }
     public AttendanceStatus getAttendanceStatus(String name, LocalDate date) {
-        Student student = studentBook.get(name) ;
+        Student student = getStudentByName(name) ;
         return student.getAttendanceStatus(date);
     }
     public LocalTime getAttendanceTime(String name, LocalDate date) {
-        Student student = studentBook.get(name) ;
+        Student student = getStudentByName(name) ;
         return student.getAttendanceTime(date);
     }
     public List<List<AttendanceReport>> findDisciplinaryCandidates(LocalDate date) {

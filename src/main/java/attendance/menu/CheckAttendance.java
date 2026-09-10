@@ -26,9 +26,6 @@ public class CheckAttendance implements MenuAction {
     }
     public ActionResult run() {
         String nickname = inputView.readNickname();
-        if (!attendance.hasStudent(nickname)){
-            throw new IllegalArgumentException("[ERROR] 등록되지 않은 닉네임입니다.");
-        }
         LocalTime attendTime;
         try {
             attendTime = LocalTime.parse(inputView.readAttendTime());

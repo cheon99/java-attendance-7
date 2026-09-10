@@ -26,9 +26,6 @@ public class ModifyAttendance implements MenuAction {
     }
     public ActionResult run() {
         String nickname = inputView.readNickname();
-        if (!attendance.hasStudent(nickname)){
-            throw new IllegalArgumentException("[ERROR] 등록되지 않은 닉네임입니다.");
-        }
         LocalDate attendanceDate;
         try {
             attendanceDate = today.withDayOfMonth(inputView.readDay());
