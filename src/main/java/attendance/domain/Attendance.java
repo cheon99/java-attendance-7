@@ -38,10 +38,6 @@ public class Attendance {
         Student student = studentBook.get(name) ;
         return student.getAttendanceTime(date);
     }
-    public  Map<LocalDate, AttendanceRecord> getAttendanceLog(String name) {
-        Student student = studentBook.get(name) ;
-        return student.getAttendanceLog();
-    }
     public Map<String, Student> getStudentBook() {
         return studentBook;
     }

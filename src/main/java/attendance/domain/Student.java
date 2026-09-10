@@ -34,10 +34,6 @@ public class Student {
         AttendanceRecord record = this.attendanceLog.get(date);
         return record.getAttendanceTime() ;
     }
-    public Map<LocalDate, AttendanceRecord> getAttendanceLog() {
-        return attendanceLog;
-    }
-
     public AttendanceReport checkPenaltyStatus(LocalDate today){
         today = Adjustment.date;
         List<AttendanceRecord> attendanceRecordExtended = new ArrayList<>();
