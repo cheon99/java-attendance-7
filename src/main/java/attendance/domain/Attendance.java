@@ -52,7 +52,7 @@ public class Attendance {
     }
     private List<List<AttendanceReport>> sortList(List<List<AttendanceReport>> listArr) {
         for (List<AttendanceReport> list : listArr) {
-            list.sort(Comparator.comparingInt((AttendanceReport result) -> result.getLate() / 3 + result.getAbsent()).reversed().thenComparing(AttendanceReport::getName));
+            list.sort(Comparator.comparingInt((AttendanceReport result) -> DisciplinaryPolicy.unitConversion(result.getLate(), result.getAbsent())).reversed().thenComparing(AttendanceReport::getName));
         }
         return listArr;
     }

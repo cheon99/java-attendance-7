@@ -13,15 +13,19 @@ public enum DisciplinaryPolicy{
         return value;
     }
     public static DisciplinaryPolicy from(int LATE, int ABSENT) {
-        if (ABSENT + LATE/3 > 5){
+        int num = unitConversion(LATE, ABSENT);
+        if (num > 5){
             return EXPULSION;
         }
-        if (ABSENT + LATE/3 >= 3){
+        if (num >= 3){
             return MEETING;
         }
-        if (ABSENT + LATE/3 >= 2){
+        if (num >= 2){
             return WARN;
         }
         return FINE;
+    }
+    public static int unitConversion(int LATE, int ABSENT){
+        return ABSENT + LATE/3;
     }
 }
