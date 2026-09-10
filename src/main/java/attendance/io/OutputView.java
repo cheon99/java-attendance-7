@@ -38,7 +38,7 @@ public class OutputView {
         for (int day = 1; day <= date.lengthOfMonth(); day++) {
             LocalDate checkDate = date.withDayOfMonth(day);
             if (AttendanceDayType.from(checkDate.getDayOfWeek()) == AttendanceDayType.WEEKEND) {continue;}
-            if (checkDate == date) {break;}
+            if (checkDate == date || checkDate.isAfter(date)) {break;}
             String dayStr = checkDate.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.KOREAN);
             if (attendanceRecordExtended.get(checkDate).getAttendanceTime() == null) {
                 System.out.printf("%d월 %d일 %s --:-- (%s)%n", checkDate.getMonthValue(), checkDate.getDayOfMonth(), dayStr, attendanceRecordExtended.get(checkDate).getAttendanceStatus().getValue());

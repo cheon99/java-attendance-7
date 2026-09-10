@@ -43,7 +43,7 @@ public class Student {
         for (int day = 1; day <= today.lengthOfMonth(); day++) {
             LocalDate date = today.withDayOfMonth(day);
             if (AttendanceDayType.from(date.getDayOfWeek()) == AttendanceDayType.WEEKEND) {continue;}
-            if (date == today) {break;}
+            if (date == today || date.isAfter(today)) {break;}
             AttendanceRecord record = attendanceLog.get(date);
             if  (record == null) {
                 attendanceRecordExtended.put(date, new AttendanceRecord(date, null));
