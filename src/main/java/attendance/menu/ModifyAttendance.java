@@ -2,7 +2,7 @@ package attendance.menu;
 
 import attendance.application.ActionResult;
 import attendance.domain.Attendance;
-import attendance.io.InputParser;
+import attendance.io.Parser;
 import attendance.io.InputView;
 import attendance.io.OutputView;
 
@@ -25,17 +25,12 @@ public class ModifyAttendance implements MenuAction {
     }
     public ActionResult run() {
         String nickname = inputView.readNickname();
-        LocalDate attendanceDate;
-        try {
-            attendanceDate = today.withDayOfMonth(InputParser.intParse(inputView.readDay()));
-        } catch (DateTimeParseException e) {
-            throw new IllegalArgumentException("[ERROR] 잘못된 형식을 입력하였습니다.");
-        }
+        LocalDate attendanceDate = Parser.dateParse(today, Parser.intParse(inputView.readDay()));
         String dayStr = attendanceDate.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.KOREAN);
         if (attendanceDate.isAfter(today)) {
             throw new IllegalArgumentException("[ERROR] 잘못된 형식을 입력하였습니다.");
         }
-        LocalTime attendTime = InputParser.timeParse(inputView.readAttendTime());
+        LocalTime attendTime = Parser.timeParse(inputView.readAttendTime());
         if (!attendance.hasAttendance(nickname, attendanceDate)){
             throw new IllegalArgumentException("[ERROR] 해당 날짜에 수정할 기록이 없습니다");
         }

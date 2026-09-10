@@ -14,7 +14,7 @@ public class InputView {
         System.out.println("등교 시간을 입력해 주세요.");
         return Console.readLine();
     }
-    public int readDay() {
+    public String readDay() {
         System.out.println("수정하려는 날짜(일)를 입력해 주세요.");
         return Console.readLine();
     }
