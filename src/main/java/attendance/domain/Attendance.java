@@ -20,10 +20,6 @@ public class Attendance {
         Student student = getStudentByName(name) ;
         student.addAttendance(date, attendTime);
     }
-    public boolean hasAttendance(String name, LocalDate date) {
-        Student student = getStudentByName(name) ;
-        return student.hasAttendance(date) ;
-    }
     public Student getStudent(String name) {
         return getStudentByName(name);
     }
