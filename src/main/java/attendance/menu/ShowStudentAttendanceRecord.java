@@ -2,13 +2,11 @@ package attendance.menu;
 
 import attendance.domain.ActionResult;
 import attendance.domain.Attendance;
-import attendance.domain.AttendanceRecord;
-import attendance.domain.PenaltyResult;
+import attendance.domain.AttendanceReport;
 import attendance.io.InputView;
 import attendance.io.OutputView;
 
 import java.time.LocalDate;
-import java.util.Map;
 
 public class ShowStudentAttendanceRecord implements MenuAction {
     InputView inputView;
@@ -26,7 +24,7 @@ public class ShowStudentAttendanceRecord implements MenuAction {
         if (!attendance.hasStudent(nickname)){
             throw new IllegalArgumentException("[ERROR] 등록되지 않은 닉네임입니다.");
         }
-        PenaltyResult result = attendance.getStudent(nickname).checkPenaltyStatus(today);
+        AttendanceReport result = attendance.getStudent(nickname).checkPenaltyStatus(today);
         outputView.printStudentAttendanceRecordLog(result) ;
         outputView.printStudentAttendanceRecordSummary(result) ;
         return  ActionResult.CONTINUE;

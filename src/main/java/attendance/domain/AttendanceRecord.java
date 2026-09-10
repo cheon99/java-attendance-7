@@ -10,10 +10,7 @@ public class AttendanceRecord {
     public AttendanceRecord(LocalDate date, LocalTime time) {
         this.date = date ;
         this.attendanceTime = time ;
-        updateAttendanceStatus();
-    }
-    private void updateAttendanceStatus() {
-        status = AttendanceStatus.from(date, attendanceTime);
+        this.status = AttendanceStatus.from(date, attendanceTime);
     }
     public AttendanceStatus getAttendanceStatus() {
         return status;

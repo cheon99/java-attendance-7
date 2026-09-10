@@ -31,23 +31,14 @@ public class OutputView {
     public void printModifyAttendanceResult(String string){
         System.out.println(string);
     }
-    public void printStudentAttendanceRecordLog(PenaltyResult result) {
-        LocalDate date = result.getDate();
-        Map<LocalDate, AttendanceRecord> attendanceRecordExtended = result.getAttendanceRecordExtended();
+    public void printStudentAttendanceRecordLog(AttendanceReport result) {
         System.out.printf("이번 달 %s의 출석 기록입니다.%n",result.getName());
-        for (int day = 1; day <= date.lengthOfMonth(); day++) {
-            LocalDate checkDate = date.withDayOfMonth(day);
-            if (AttendanceDayType.from(checkDate.getDayOfWeek()) == AttendanceDayType.WEEKEND) {continue;}
-            if (checkDate == date || checkDate.isAfter(date)) {break;}
-            String dayStr = checkDate.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.KOREAN);
-            if (attendanceRecordExtended.get(checkDate).getAttendanceTime() == null) {
-                System.out.printf("%d월 %d일 %s --:-- (%s)%n", checkDate.getMonthValue(), checkDate.getDayOfMonth(), dayStr, attendanceRecordExtended.get(checkDate).getAttendanceStatus().getValue());
-                continue;
-            }
-            System.out.printf("%d월 %d일 %s %s (%s)%n", checkDate.getMonthValue(), checkDate.getDayOfMonth(), dayStr, attendanceRecordExtended.get(checkDate).getAttendanceTime().toString(), attendanceRecordExtended.get(checkDate).getAttendanceStatus().getValue());
+        for (String line :result.getPrintString()){
+            System.out.println(line);
         }
+
     }
-    public void printStudentAttendanceRecordSummary(PenaltyResult result){
+    public void printStudentAttendanceRecordSummary(AttendanceReport result){
         int present = result.getPresent();
         int late = result.getLate();
         int absent = result.getAbsent();
@@ -62,8 +53,8 @@ public class OutputView {
     public void printPreStringForWarnedStudent() {
         System.out.println("제적 위험자 조회 결과");
     }
-    public void printNeedWarnedStudent(List<PenaltyResult> list) {
-        for  (PenaltyResult result : list) {
+    public void printNeedWarnedStudent(List<AttendanceReport> list) {
+        for  (AttendanceReport result : list) {
             System.out.printf("- %s: 결석 %d회, 지각 %d회 (%s)%n",result.getName(),result.getAbsent(),result.getLate(),result.getStatus().getValue());
         }
     }

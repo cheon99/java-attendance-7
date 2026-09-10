@@ -2,7 +2,9 @@ package attendance.domain;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Student {
@@ -36,21 +38,21 @@ public class Student {
         return attendanceLog;
     }
 
-    public PenaltyResult checkPenaltyStatus(LocalDate today){
+    public AttendanceReport checkPenaltyStatus(LocalDate today){
         today = Adjustment.date;
-        Map<LocalDate, AttendanceRecord> attendanceRecordExtended = new HashMap<>();
+        List<AttendanceRecord> attendanceRecordExtended = new ArrayList<>();
         for (int day = 1; day <= today.lengthOfMonth(); day++) {
             LocalDate date = today.withDayOfMonth(day);
             if (AttendanceDayType.from(date.getDayOfWeek()) == AttendanceDayType.WEEKEND) {continue;}
             if (date == today || date.isAfter(today)) {break;}
             AttendanceRecord record = attendanceLog.get(date);
             if  (record == null) {
-                attendanceRecordExtended.put(date, new AttendanceRecord(date, null));
+                attendanceRecordExtended.add(new AttendanceRecord(date, null));
                 continue;
             }
-            attendanceRecordExtended.put(date, new AttendanceRecord(date, record.getAttendanceTime()));
+            attendanceRecordExtended.add(new AttendanceRecord(date, record.getAttendanceTime()));
         }
-        return new PenaltyResult(name,attendanceRecordExtended, today);
+        return new AttendanceReport(name,attendanceRecordExtended, today);
     }
 }
 
