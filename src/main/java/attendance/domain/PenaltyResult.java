@@ -11,14 +11,29 @@ public class PenaltyResult {
     private int absent;
     private LocalDate date;
     private Map<LocalDate, AttendanceRecord> attendanceRecordExtended ;
-    public PenaltyResult(String name, DisciplinaryPolicy status, Map<LocalDate, AttendanceRecord> attendanceRecordExtended, int present, int late, int absent, LocalDate date) {
+    public PenaltyResult(String name, Map<LocalDate, AttendanceRecord> attendanceRecordExtended, LocalDate date) {
         this.name = name;
-        this.status = status;
-        this.present = present;
-        this.late = late;
-        this.absent = absent;
         this.date = date;
         this.attendanceRecordExtended = attendanceRecordExtended;
+        updatePenaltyResult();
+    }
+    private void updatePenaltyResult() {
+        for (Map.Entry<LocalDate, AttendanceRecord> entry : attendanceRecordExtended.entrySet()) {
+            LocalDate key = entry.getKey();
+            AttendanceRecord value = entry.getValue();
+            if (value.getAttendanceStatus() == AttendanceStatus.ABSENT){
+                absent++;
+                continue;
+            }
+            if (value.getAttendanceStatus() == AttendanceStatus.PRESENT){
+                present++;
+                continue;
+            }
+            if (value.getAttendanceStatus() == AttendanceStatus.LATE){
+                late++;
+            }
+        }
+        status = DisciplinaryPolicy.from(late, absent);
     }
     public DisciplinaryPolicy getStatus() { return status; }
     public int getPresent() { return present; }

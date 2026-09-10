@@ -39,35 +39,19 @@ public class Student {
 
     public PenaltyResult checkPenaltyStatus(LocalDate today){
         today = Adjustment.date;
-        int present = 0;
-        int late = 0;
-        int absent = 0;
         Map<LocalDate, AttendanceRecord> attendanceRecordExtended = new HashMap<>();
         for (int day = 1; day <= today.lengthOfMonth(); day++) {
             LocalDate date = today.withDayOfMonth(day);
-            if (AttendanceDayType.from(date.getDayOfWeek()) == AttendanceDayType.WEEKEND) {
-                continue;
-            }
-            if (date == today) {
-                break;
-            }
+            if (AttendanceDayType.from(date.getDayOfWeek()) == AttendanceDayType.WEEKEND) {continue;}
+            if (date == today) {break;}
             AttendanceRecord record = attendanceLog.get(date);
             if  (record == null) {
-                absent++;
                 attendanceRecordExtended.put(date, new AttendanceRecord(date, null));
                 continue;
             }
-            AttendanceStatus status = record.getAttendanceStatus();
-            if (status == AttendanceStatus.ABSENT) {
-                absent++;
-            }
-            if (status == AttendanceStatus.LATE) {
-                late++;
-            }
-            present++;
             attendanceRecordExtended.put(date, new AttendanceRecord(date, record.getAttendanceTime()));
         }
-        return new PenaltyResult(name, DisciplinaryPolicy.from(late, absent), attendanceRecordExtended, present, late, absent, today);
+        return new PenaltyResult(name,attendanceRecordExtended, today);
     }
 }
 
