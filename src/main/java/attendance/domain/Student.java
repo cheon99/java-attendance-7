@@ -41,7 +41,6 @@ public class Student {
         return record.getAttendanceTime() ;
     }
     public AttendanceReport reportUntil(LocalDate today){
-        today = Context.date;
         List<AttendanceRecord> attendanceRecordExtended = new ArrayList<>();
         for (int day = 1; day <= today.lengthOfMonth(); day++) {
             LocalDate date = today.withDayOfMonth(day);

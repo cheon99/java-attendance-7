@@ -1,5 +1,6 @@
 package attendance;
 
+import attendance.domain.Context;
 import attendance.resource.AttendanceResourceLoader;
 import attendance.contoroller.UiController;
 import attendance.domain.Attendance;
@@ -11,7 +12,7 @@ import java.time.LocalDate;
 
 public class Application {
     public static void main(String[] args) {
-        LocalDate today = LocalDate.parse(DateTimes.now().toString().substring(0,10));
+        LocalDate today = Context.getDate();
         Attendance attendance = new AttendanceResourceLoader().load() ;
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();

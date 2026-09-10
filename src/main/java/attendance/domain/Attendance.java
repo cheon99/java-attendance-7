@@ -23,7 +23,7 @@ public class Attendance {
     public boolean hasAttendance(String name, LocalDate date) {
         Student student = getStudentByName(name) ;
         return student.hasAttendance(date) ;
-    }ㅗ
+    }
     public Student getStudent(String name) {
         return getStudentByName(name);
     }

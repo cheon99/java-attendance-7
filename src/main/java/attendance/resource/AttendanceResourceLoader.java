@@ -27,7 +27,6 @@ public class  AttendanceResourceLoader {
             Student student = attendance.getStudent(columns[0]);
             String[] splitedDateTime = columns[1].split(" ",-1);
             student.addAttendance(parseDate(splitedDateTime[0]), parseTime(splitedDateTime[1]));
-
         }
         return attendance;
     }
