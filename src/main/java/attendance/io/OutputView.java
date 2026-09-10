@@ -28,15 +28,17 @@ public class OutputView {
         String dayStr = today.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.KOREAN);
         System.out.printf("%d월 %d일 %s %s (%s) %n", today.getMonthValue(), today.getDayOfMonth(), dayStr, attendTime.toString(), status.getValue());
     }
-    public void printModifyAttendanceResult(String string){
-        System.out.println(string);
+    public void printPreStringForModifyAttendanceResult(int month, int day, String dayStr, String time, String status){
+        System.out.print("%d월 %d일 %s %s (%s) -> ".formatted(month, day, dayStr, time, status));
+    }
+    public void printModifyAttendanceResult(String time, String status){
+        System.out.println("%s (%s) 수정 완료!".formatted(time, status));
     }
     public void printStudentAttendanceRecordLog(AttendanceReport result) {
         System.out.printf("이번 달 %s의 출석 기록입니다.%n",result.getName());
         for (String line :result.getPrintString()){
             System.out.println(line);
         }
-
     }
     public void printStudentAttendanceRecordSummary(AttendanceReport result){
         int present = result.getPresent();

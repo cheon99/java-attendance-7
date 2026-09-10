@@ -54,10 +54,9 @@ public class ModifyAttendance implements MenuAction {
         if (!attendance.hasAttendance(nickname, attendanceDate)){
             throw new IllegalArgumentException("[ERROR] 해당 날짜에 수정할 기록이 없습니다");
         }
-        String preString = "%d월 %d일 %s %s (%s) -> ".formatted(attendanceDate.getMonthValue(), attendanceDate.getDayOfMonth(), dayStr, attendance.getAttendanceTime(nickname, attendanceDate).toString(), attendance.getAttendanceStatus(nickname, attendanceDate).getValue() );
+        outputView.printPreStringForModifyAttendanceResult(attendanceDate.getMonthValue(), attendanceDate.getDayOfMonth(), dayStr, attendance.getAttendanceTime(nickname, attendanceDate).toString(), attendance.getAttendanceStatus(nickname, attendanceDate).getValue() );
         attendance.modifyAttendance(nickname, attendanceDate, attendTime);
-        String finalString = preString + "%s (%s) 수정 완료!".formatted(attendTime.toString(), attendance.getAttendanceStatus(nickname, attendanceDate).getValue());
-        outputView.printModifyAttendanceResult(finalString);
+        outputView.printModifyAttendanceResult(attendTime.toString(), attendance.getAttendanceStatus(nickname, attendanceDate).getValue());
         return ActionResult.CONTINUE;
     }
 }
