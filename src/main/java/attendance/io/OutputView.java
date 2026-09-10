@@ -35,10 +35,29 @@ public class OutputView {
         System.out.println("%s (%s) 수정 완료!".formatted(time, status));
     }
     public void printStudentAttendanceRecordLog(AttendanceReport result) {
-        System.out.printf("이번 달 %s의 출석 기록입니다.%n",result.getName());
-        for (String line :result.getPrintString()){
-            System.out.println(line);
+        System.out.printf("이번 달 %s의 출석 기록입니다.%n", result.getName());
+        for (AttendanceRecord record : result.getAttendanceRecordExtended()) {
+            printAttendanceRecord(record);
         }
+    }
+    private void printAttendanceRecord(AttendanceRecord record) {
+        LocalDate date = record.getDate();
+        String dayStr = date.getDayOfWeek()
+                .getDisplayName(TextStyle.FULL, Locale.KOREAN);
+        String timeStr = formatTime(record.getAttendanceTime());
+
+        System.out.printf("%d월 %d일 %s %s (%s)%n",
+                date.getMonthValue(),
+                date.getDayOfMonth(),
+                dayStr,
+                timeStr,
+                record.getAttendanceStatus().getValue());
+    }
+    private String formatTime(LocalTime time) {
+        if (time == null) {
+            return "--:--";
+        }
+        return time.toString();
     }
     public void printStudentAttendanceRecordSummary(AttendanceReport result){
         int present = result.getPresent();

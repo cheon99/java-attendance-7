@@ -36,16 +36,4 @@ public class AttendanceReport {
     public String getName() { return name; }
     public LocalDate getDate() { return date; }
     public List<AttendanceRecord> getAttendanceRecordExtended() { return attendanceRecordExtended; }
-    public List<String> getPrintString() {
-        List<String> printString = new ArrayList<>();
-        for (AttendanceRecord record : attendanceRecordExtended) {
-            String dayStr = record.getDate().getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.KOREAN);
-            if (record.getAttendanceTime() == null) {
-                printString.add("%d월 %d일 %s --:-- (결석)".formatted(record.getDate().getMonthValue(), record.getDate().getDayOfMonth(), dayStr));
-                continue;
-            }
-            printString.add("%d월 %d일 %s %s (%s)".formatted(record.getDate().getMonthValue(), record.getDate().getDayOfMonth(), dayStr, record.getAttendanceTime().toString(), record.getAttendanceStatus().getValue()));
-        }
-        return printString;
-    }
 }
