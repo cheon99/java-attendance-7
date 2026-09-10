@@ -2,6 +2,7 @@ package attendance.menu;
 
 import attendance.application.ActionResult;
 import attendance.domain.Attendance;
+import attendance.domain.AttendanceRecord;
 import attendance.io.InputView;
 import attendance.io.OutputView;
 import attendance.io.Parser;
@@ -21,7 +22,9 @@ public class CheckAttendance implements MenuAction {
         this.outputView = outputView;
     }
     public ActionResult run() {
+        new AttendanceRecord(today, LocalTime.of(10,00));
         String nickname = inputView.readNickname();
+        attendance.getStudent(nickname);
         LocalTime attendTime = Parser.timeParse(inputView.readAttendTime());
         attendance.addAttendance(nickname, today, attendTime);
         outputView.printCheckAttendanceResult(today, attendTime, attendance.getAttendanceStatus(nickname, today));

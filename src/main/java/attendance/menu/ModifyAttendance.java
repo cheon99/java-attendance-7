@@ -23,12 +23,14 @@ public class ModifyAttendance implements MenuAction {
     }
     public ActionResult run() {
         String nickname = inputView.readNickname();
+        attendance.getStudent(nickname);
         LocalDate attendanceDate = Parser.dateParse(today, Parser.intParse(inputView.readDay()));
         String dayStr = attendanceDate.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.KOREAN);
         LocalTime attendTime = Parser.timeParse(inputView.readModifiedAttendTime());
-        outputView.printPreStringForModifyAttendanceResult(attendanceDate.getMonthValue(), attendanceDate.getDayOfMonth(), dayStr, attendance.getAttendanceTime(nickname, attendanceDate).toString(), attendance.getAttendanceStatus(nickname, attendanceDate).getValue() );
+        String time = attendance.getAttendanceTime(nickname, attendanceDate).toString();
+        String status = attendance.getAttendanceStatus(nickname, attendanceDate).getValue();
         attendance.modifyAttendance(nickname, attendanceDate, attendTime);
-        outputView.printModifyAttendanceResult(attendTime.toString(), attendance.getAttendanceStatus(nickname, attendanceDate).getValue());
+        outputView.printModifyAttendanceResult(attendanceDate.getMonthValue(), attendanceDate.getDayOfMonth(), dayStr, time,status, attendTime.toString(), attendance.getAttendanceStatus(nickname, attendanceDate).getValue());
         return ActionResult.CONTINUE;
     }
 }

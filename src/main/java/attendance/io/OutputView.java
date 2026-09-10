@@ -13,7 +13,7 @@ public class OutputView {
     public void printMenu(LocalDate today) {
         String dayStr = today.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.KOREAN);
         System.out.printf(
-                "오늘은 %d월 %d일 %s입니다. 기능을 선택해 주세요.%n",
+                "오늘은 %d월 %02d일 %s입니다. 기능을 선택해 주세요.%n",
                 today.getMonthValue(),
                 today.getDayOfMonth(),
                 dayStr
@@ -26,13 +26,11 @@ public class OutputView {
     }
     public void printCheckAttendanceResult(LocalDate today, LocalTime attendTime, AttendanceStatus status ) {
         String dayStr = today.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.KOREAN);
-        System.out.printf("%d월 %d일 %s %s (%s) %n", today.getMonthValue(), today.getDayOfMonth(), dayStr, attendTime.toString(), status.getValue());
+        System.out.printf("%d월 %02d일 %s %s (%s) %n", today.getMonthValue(), today.getDayOfMonth(), dayStr, attendTime.toString(), status.getValue());
     }
-    public void printPreStringForModifyAttendanceResult(int month, int day, String dayStr, String time, String status){
-        System.out.print("%d월 %d일 %s %s (%s) -> ".formatted(month, day, dayStr, time, status));
-    }
-    public void printModifyAttendanceResult(String time, String status){
-        System.out.println("%s (%s) 수정 완료!".formatted(time, status));
+    public void printModifyAttendanceResult(int month, int day, String dayStr, String time, String status, String time2, String status2){
+        System.out.print("%d월 %02d일 %s %s (%s) -> ".formatted(month, day, dayStr, time, status));
+        System.out.println("%s (%s) 수정 완료!".formatted(time2, status2));
     }
     public void printStudentAttendanceRecordLog(AttendanceReport result) {
         System.out.printf("이번 달 %s의 출석 기록입니다.%n", result.getName());
@@ -46,7 +44,7 @@ public class OutputView {
                 .getDisplayName(TextStyle.FULL, Locale.KOREAN);
         String timeStr = formatTime(record.getAttendanceTime());
 
-        System.out.printf("%d월 %d일 %s %s (%s)%n",
+        System.out.printf("%d월 %02d일 %s %s (%s)%n",
                 date.getMonthValue(),
                 date.getDayOfMonth(),
                 dayStr,

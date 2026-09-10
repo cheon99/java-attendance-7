@@ -30,6 +30,7 @@ public class UiController {
             }
         } catch(IllegalArgumentException e) {
             System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage()) ;
         }
     }
 }

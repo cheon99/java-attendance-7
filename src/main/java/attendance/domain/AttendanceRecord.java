@@ -15,7 +15,7 @@ public class AttendanceRecord {
         if (time != null) {
             require(!AttendancePolicy.isOperationTime(time), "[ERROR] 캠퍼스 운영 시간에만 출석이 가능합니다.");
         }
-        require(date == Context.getDate() || date.isAfter(Context.getDate()), "[ERROR] 잘못된 형식을 입력하였습니다.");
+        require(date.isAfter(Context.getDate()), "[ERROR] 잘못된 형식을 입력하였습니다.");
         this.date = date ;
         this.attendanceTime = time ;
         this.status = AttendanceStatus.from(date, attendanceTime);

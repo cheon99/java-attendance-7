@@ -21,6 +21,7 @@ public class ShowStudentAttendanceRecord implements MenuAction {
     }
     public ActionResult run() {
         String nickname = inputView.readNickname();
+        attendance.getStudent(nickname);
         AttendanceReport result = attendance.getStudent(nickname).reportUntil(today);
         outputView.printStudentAttendanceRecordLog(result) ;
         outputView.printStudentAttendanceRecordSummary(result) ;

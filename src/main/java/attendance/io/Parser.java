@@ -1,5 +1,6 @@
 package attendance.io;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
@@ -22,7 +23,7 @@ public class Parser {
     public static LocalDate dateParse(LocalDate date, int day) {
         try {
             return date.withDayOfMonth(day);
-        } catch (DateTimeParseException e) {
+        } catch (DateTimeException e) {
             throw new IllegalArgumentException("[ERROR] 잘못된 형식을 입력하였습니다.");
         }
     }
