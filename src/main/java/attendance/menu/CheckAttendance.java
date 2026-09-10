@@ -25,10 +25,6 @@ public class CheckAttendance implements MenuAction {
         this.outputView = outputView;
     }
     public ActionResult run() {
-        String dayStr = today.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.KOREAN);
-        if (AttendanceDayType.from(today.getDayOfWeek()) == AttendanceDayType.WEEKEND) {
-            throw new IllegalArgumentException("[ERROR] %d월 %d일 %s은 등교일이 아닙니다.".formatted(today.getMonthValue(), today.getDayOfMonth(), dayStr));
-        }
         String nickname = inputView.readNickname();
         if (!attendance.hasStudent(nickname)){
             throw new IllegalArgumentException("[ERROR] 등록되지 않은 닉네임입니다.");

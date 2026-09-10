@@ -24,7 +24,7 @@ public class ShowStudentAttendanceRecord implements MenuAction {
         if (!attendance.hasStudent(nickname)){
             throw new IllegalArgumentException("[ERROR] 등록되지 않은 닉네임입니다.");
         }
-        AttendanceReport result = attendance.getStudent(nickname).checkPenaltyStatus(today);
+        AttendanceReport result = attendance.getStudent(nickname).reportUntil(today);
         outputView.printStudentAttendanceRecordLog(result) ;
         outputView.printStudentAttendanceRecordSummary(result) ;
         return  ActionResult.CONTINUE;

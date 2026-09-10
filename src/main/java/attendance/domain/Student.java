@@ -34,7 +34,7 @@ public class Student {
         AttendanceRecord record = this.attendanceLog.get(date);
         return record.getAttendanceTime() ;
     }
-    public AttendanceReport checkPenaltyStatus(LocalDate today){
+    public AttendanceReport reportUntil(LocalDate today){
         today = Adjustment.date;
         List<AttendanceRecord> attendanceRecordExtended = new ArrayList<>();
         for (int day = 1; day <= today.lengthOfMonth(); day++) {

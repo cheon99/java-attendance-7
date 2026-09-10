@@ -36,9 +36,7 @@ public class ModifyAttendance implements MenuAction {
             throw new IllegalArgumentException("[ERROR] 잘못된 형식을 입력하였습니다.");
         }
         String dayStr = attendanceDate.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.KOREAN);
-        if (AttendanceDayType.from(attendanceDate.getDayOfWeek()) == AttendanceDayType.WEEKEND) {
-            throw new IllegalArgumentException("[ERROR] %d월 %d일 %s은 등교일이 아닙니다.".formatted(attendanceDate.getMonthValue(), attendanceDate.getDayOfMonth(), dayStr));
-        }
+
         if (attendanceDate.isAfter(today)) {
             throw new IllegalArgumentException("[ERROR] 잘못된 형식을 입력하였습니다.");
         }

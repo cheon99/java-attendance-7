@@ -43,7 +43,7 @@ public class Attendance {
         List<AttendanceReport> WARN = new ArrayList<>();
         List<List<AttendanceReport>> listArr = List.of(EXPULSION, MEETING, WARN);
         for (Student student : studentBook.values()) {
-            AttendanceReport result = student.checkPenaltyStatus(date);
+            AttendanceReport result = student.reportUntil(date);
             if (result.getStatus() == DisciplinaryPolicy.EXPULSION){EXPULSION.add(result);}
             if (result.getStatus() == DisciplinaryPolicy.MEETING){MEETING.add(result);}
             if (result.getStatus() == DisciplinaryPolicy.WARN){WARN.add(result);}
