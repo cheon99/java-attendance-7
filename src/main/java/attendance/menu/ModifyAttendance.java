@@ -33,7 +33,6 @@ public class ModifyAttendance implements MenuAction {
             throw new IllegalArgumentException("[ERROR] 잘못된 형식을 입력하였습니다.");
         }
         String dayStr = attendanceDate.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.KOREAN);
-
         if (attendanceDate.isAfter(today)) {
             throw new IllegalArgumentException("[ERROR] 잘못된 형식을 입력하였습니다.");
         }
@@ -42,9 +41,6 @@ public class ModifyAttendance implements MenuAction {
             attendTime = LocalTime.parse(inputView.readModifiedAttendTime());
         } catch (DateTimeParseException e) {
             throw new IllegalArgumentException("[ERROR] 잘못된 형식을 입력하였습니다.");
-        }
-        if (!AttendancePolicy.isOperationTime(attendTime)) {
-            throw new IllegalArgumentException("[ERROR] 캠퍼스 운영 시간에만 출석이 가능합니다.");
         }
         if (!attendance.hasAttendance(nickname, attendanceDate)){
             throw new IllegalArgumentException("[ERROR] 해당 날짜에 수정할 기록이 없습니다");
